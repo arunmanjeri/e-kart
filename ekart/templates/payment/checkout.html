@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block base %}
+
+
+    <div class="container-fluid my-4">
+
+        <!-- ============================ COMPONENT 1 ================================= -->
+
+        <div class="row">
+            <aside class="col-lg-6">
+                <div class="card">
+                    <div class="card-body mb-3 text-center">
+                        <h4 class="card-title"> Billing Address </h4>
+                        <form action="{% url 'checkout'%}" method='POST'>
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col-6 form-group">
+                                    <label for="first_name">First Name</label>
+                                    {{form.first_name}}
+                                    <label for="email">Email</label>
+                                    {{form.email}}
+                                </div>
+                                <div class="col-6 form-group">
+                                    <label for="last_name">Last Name</label>
+                                    {{form.last_name}}
+                                    <label for="phone">Phone</label>
+                                    {{form.phone}}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label for="address_line_1">Address 1</label>
+                                    {{form.address_line_1}}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label for="address_line_2">Address 2</label>
+                                    {{form.address_line_2}}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label for="city">City</label>
+                                    {{form.city}}
+                                </div>
+                                <div class="col form-group">
+                                    <label for="state">State</label>
+                                    {{form.state}}
+                                </div>
+                                <div class="col form-group">
+                                    <label for="country">Country</label>
+                                    {{form.country}}
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label for="order_note">Order Note</label>
+                                    {{form.order_note}}
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div> <!-- card.// -->
+            </aside> <!-- col.// -->
+            <aside class="col-lg-6 ">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-borderless table-shopping-cart">
+                            <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                              <th scope="col">Product</th>
+                              <th scope="col" width="120">Quantity</th>
+                              <th scope="col" width="120">Price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for carting_item in carting_items %}
+                            <tr>
+                                <td>
+                                    <figure class="itemside align-items-center"> 
+                                        <figcaption class="info">
+                                            <a href="" class="title text-dark">{{ carting_item.product.product_name}}</a>
+                                            <p class="text-muted small">
+                                               {{carting_item.category_size}} | {{carting_item.category_color}}
+                                            </p>
+                                        </figcaption>
+                                    </figure>
+                                </td>
+                                <td> 
+                                    <!-- col.// -->
+                                                <div class="col"> 
+                                                    <div class="input-group input-spinner">
+                                                        <h4>{{ carting_item.quantity }}</h4>
+                                                    </div> <!-- input-group.// -->
+                                                </div> <!-- col.// -->
+                                </td>
+                                <td> 
+                                    <div class="price-wrap"> 
+                                        <var class="price">{{ carting_item.subtotal}}</var> 
+                                        <br>
+                                        <small class="text-muted">{{ carting_item.product.price }}/per</small> 
+                                    </div> <!-- price-wrap .// -->
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td>
+                                    <a>Total</a>
+                                </td>
+                                <td>
+                                    <div class="col"> 
+                                    <div class="input-group input-spinner">
+                                        <h4>{{quantity }}</h4>
+                                    </div> <!-- input-group.// -->
+                                </div> 
+                            </td>
+                                <td>
+                                    <div class="price-wrap"> 
+                                        <var class="price">{{total}}</var> 
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-primary btn-block"> Place Order </button>
+                        <a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
+                    </form>
+                    </div> <!-- card-body.// -->
+                </div> <!-- card.// -->
+
+            </aside> <!-- col.// -->
+
+
+        </div> <!-- row.// -->
+
+        <!-- ============================ COMPONENT 1 END .// ================================= -->
+
+    </div> <!-- container .//  -->
+
+
+
+{% endblock %}

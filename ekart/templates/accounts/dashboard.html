@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block base %}
+
+<div class="container mt-4 mb-3">
+    <div mt-3>
+        {% include 'include/alert.html'%}
+      </div>
+    <div class="row">
+        {% include 'include/sidebar.html'%}
+        <main class="col-md-9">
+            <article class="card">
+                <header class="card-header text-center">
+                    <strong class="d-inline-block mr-3">Logged In As : </strong>
+                    <span>{{request.user.fullname}}</span>
+                </header>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title"></h5>
+                                    {% if orders_count%}
+                                    <h4>{{orders_count}}</h4>
+                                    <a href="{% url 'my_orders'%}">View Orders</a>
+                                    {% else %}
+                                    <h4>0</h4>
+                                    <a>Orders</a>
+                                    {%endif%}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body p-1 text-center">
+                                    <img src="https://www.w3schools.com/howto/img_avatar.png" alt="profile pic"
+                                        width="50" height='50' style="border-radius: 50%;">
+                                    <p class="mb-1">{{request.user.email}}</p>
+                                    <p class="mb-0">{{request.user.phone_number}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- row.// -->
+                </div> <!-- card-body .// -->
+            </article> <!-- order-group.// -->
+        </main>
+    </div> <!-- row.// -->
+</div>
+
+
+
+
+
+{% endblock %}

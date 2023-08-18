@@ -1,0 +1,53 @@
+
+{% extends 'base.html' %}
+
+{% block base %}
+
+<!-- cart + summary -->
+<section class="bg-light my-5">
+    <div class="container">
+      <div class="row d-flex justify-content-lg-center">
+        <!-- cart -->
+        {% if product is None%}
+        <h4 class="card-title mb-4 text-center">Your whishlist is Empty</h4>
+        <a href="{% url 'store'%}" class="btn btn-success w-25 mx-auto"> Back to shop </a>
+        {% else %}
+        <div class="col-lg-8">
+          <div class="card border shadow-0">
+            <div class="m-4">
+              <h4 class="card-title mb-4 text-center">Your Wishlist</h4>
+              <div class="row gy-3 mb-4">
+                {% for i in product %}
+                <div class="col-lg-5">
+                  <div class="me-lg-5">
+                    <div class="d-flex">
+                      <img src="{{i.product.images.url}}" class="border rounded me-3" style="width: 96px; height: 96px;" />
+                      
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+                  <div class="">
+                    <a href="{% url 'product_view' i.product.id%}" class="h5">{{i.product.product_name}}</a>
+                  </div>
+                </div>
+
+                <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
+                  <div class="float-md-end">
+                    <a href="{% url 'witem_remove' i.id%}" onClick="return confirm('delete this item')" class="btn btn-light border text-danger icon-hover-danger"> Remove</a>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- cart -->
+        {%endif%}
+      </div>
+    </div>
+  </section>
+
+  
+{% endblock%}

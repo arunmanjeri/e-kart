@@ -1,0 +1,59 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block base %}
+
+<div class="card mx-auto" style="max-width:560px; margin-top:40px;">
+    <div mt-3>
+        {% include 'include/alert.html'%}
+      </div> 
+  <article class="card-body">
+    <header class="mb-4"><h4 class="card-title text-center">Sign up</h4></header>
+    <form action="" method="POST"> 
+        {% csrf_token %}
+            <div class="form-row">
+                <div class="col form-group">
+                    <label>First name</label>
+                    <input type="text" class="form-control" name="first_name">
+                </div> 
+                <div class="col form-group">
+                    <label>Last name</label>
+                    <input type="text" class="form-control" name="last_name">
+                </div> 
+            </div> 
+           
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Email</label>
+                  <input type="text" class="form-control" name="email">
+    
+                </div> 
+                <div class="form-group col-md-6">
+                  <label>Phone Number</label>
+                  <input type="text" class="form-control" name="phone_number">
+                </div> 
+            </div> 
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Create password</label>
+                    <input type="password" class="form-control" name="password">
+                </div> 
+                <div class="form-group col-md-6">
+                    <label>Repeat password</label>
+                    <input type="password" class="form-control" name="repeat_password">
+                </div> 
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block"> Register </button>
+            </div>      
+              
+        </form>
+    </article>
+</div>
+<p class="text-center mt-4">Have an account? <a href="{% url 'login_user'%}">Log In</a></p>
+<br><br>
+
+   
+{% endblock%}
